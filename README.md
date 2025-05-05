@@ -1,2 +1,2 @@
-# Horta-comunit-ria
+# Horta-comunitaria
 Teste de site
