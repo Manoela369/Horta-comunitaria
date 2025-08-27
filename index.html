@@ -1,678 +1,1335 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hortas Comunitárias de Maringá</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf9CdYLca04syehn7Z8zzbHg3YDSF2zeQl7Q&s">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Hortas Comunitárias de Maringá - Conectando você à natureza e à comunidade local!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== VARIÁVEIS GLOBAIS ===== */
+        :root {
+            --primary: #1e5631;
+            --primary-light: #2e7d32;
+            --primary-dark: #154423;
+            --secondary: #f9a825;
+            --secondary-light: #ffc107;
+            --light: #e4f5d4;
+            --dark: #1a3c27;
+            --text: #333;
+            --white: #ffffff;
+            --gray: #f5f5f5;
+            --earth: #8d6e63;
+            --leaf: #558b2f;
+        }
+        
+        /* ===== RESET E ESTILOS BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23aed581" fill-opacity="0.1" d="M10,10 Q25,5 40,10 T70,10 Q85,5 90,10 T95,40 Q100,55 90,60 T90,90 Q85,95 60,90 T10,90 Q5,85 10,60 T10,40 Q5,25 10,10"></path></svg>');
+            background-size: 200px;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(rgba(26, 60, 39, 0.85), rgba(26, 60, 39, 0.85)), 
+                         url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?q=80&w=2070') center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 80px 20px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="%23e4f5d4" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path><path fill="%23e4f5d4" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path><path fill="%23e4f5d4" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path></svg>');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .logo-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 20px;
+            transition: all 0.5s ease;
+        }
+        
+        .logo-icon:hover {
+            transform: rotate(15deg) scale(1.05);
+            background-color: rgba(76, 175, 80, 0.3);
+        }
+        
+        .logo-icon i {
+            font-size: 3.5rem;
+            color: var(--secondary-light);
+        }
+        
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, var(--secondary-light), var(--light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .project-banner {
+            background: linear-gradient(45deg, var(--secondary), var(--secondary-light));
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .project-banner i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .cta-button i {
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-button:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* ===== NAVEGAÇÃO ===== */
+        nav {
+            background-color: var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo-small {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+        
+        .logo-small i {
+            color: var(--secondary-light);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            font-size: 1.05rem;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-light);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu-btn:hover {
+            transform: rotate(90deg);
+        }
+        
+        /* ===== SEÇÕES COMUNS ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+        
+        .section-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.6rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--secondary), var(--secondary-light));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .section-header p {
+            max-width: 700px;
+            margin: 25px auto 0;
+            font-size: 1.15rem;
+            color: var(--primary-dark);
+        }
+        
+        /* ===== SOBRE ===== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text {
+            padding: 20px;
+        }
+        
+        .about-text h3 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 1.9rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .about-text p:before {
+            content: "🌱";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: rotate(-1deg);
+            transition: transform 0.5s ease;
+            position: relative;
+            height: 400px;
+        }
+        
+        .about-image:hover {
+            transform: rotate(0) scale(1.02);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .about-image:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 100px;
+            height: 100px;
+            background: var(--secondary);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        /* ===== BENEFÍCIOS ===== */
+        .benefits {
+            background-color: var(--gray);
+            position: relative;
+        }
+        
+        .benefits:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="%23e4f5d4" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path><path fill="%23e4f5d4" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path><path fill="%23e4f5d4" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path></svg>');
+            background-size: cover;
+            background-position: center;
+            transform: rotate(180deg);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+        
+        .benefit-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--secondary);
+        }
+        
+        .benefit-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .benefit-card:hover:before {
+            transform: scaleX(1);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .benefit-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+        
+        .benefit-card:hover .benefit-icon {
+            transform: scale(1.1);
+        }
+        
+        .benefit-card h3 {
+            color: var(--primary);
+            margin-bottom: 18px;
+            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* ===== COMO FUNCIONA ===== */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .steps::before {
+            content: "";
+            position: absolute;
+            top: 30px;
+            left: 50px;
+            right: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--primary-light), var(--secondary));
+            z-index: 0;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            margin-bottom: 40px;
+            z-index: 1;
+        }
+        
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: var(--white);
+            color: var(--primary);
+            border-radius: 50%;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 25px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover .step-number {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+        
+        .step h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+        
+        /* ===== LOCAIS ===== */
+        .locations {
+            background-color: var(--gray);
+            position: relative;
+        }
+        
+        .locations:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="%23e4f5d4" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path><path fill="%23e4f5d4" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path><path fill="%23e4f5d4" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 2px solid var(--primary-light);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .search-container i {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 35px;
+        }
+        
+        .location-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            transform: translateY(0);
+        }
+        
+        .location-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .location-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .location-image::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(to top, var(--white), transparent);
+        }
+        
+        .location-info {
+            padding: 25px;
+        }
+        
+        .location-info h3 {
+            color: var(--primary);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+        }
+        
+        .location-info h3 i {
+            color: var(--secondary);
+            background: rgba(249, 168, 37, 0.15);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .location-contact {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: rgba(76, 175, 80, 0.08);
+            border-radius: 12px;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .location-contact p {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .location-contact i {
+            color: var(--primary);
+            min-width: 25px;
+            font-size: 1.1rem;
+        }
+        
+        /* ===== RODAPÉ ===== */
+        footer {
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="%231e5631" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path><path fill="%231e5631" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path><path fill="%231e5631" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .footer-links li:before {
+            content: "🌿";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 3px 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-light);
+            transform: translateX(5px);
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+        
+        .contact-info i {
+            color: var(--secondary-light);
+            font-size: 1.2rem;
+            min-width: 25px;
+            margin-top: 3px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+        
+        /* ===== ELEMENTOS DECORATIVOS ===== */
+        .leaf {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            z-index: -1;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+        
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 1100px) {
+            .steps::before {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .steps {
+                gap: 30px;
+            }
+            
+            .step {
+                flex: 0 0 calc(50% - 30px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--primary);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                border-top: 2px solid var(--secondary);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .step {
+                flex: 0 0 100%;
+            }
+            
+            .logo h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Folhas Animadas -->
+    <div class="leaf" style="top: 10%; left: 5%;">🍃</div>
+    <div class="leaf" style="top: 20%; right: 8%;">🌿</div>
+    <div class="leaf" style="top: 50%; left: 3%;">🍀</div>
+    <div class="leaf" style="bottom: 30%; right: 5%;">🌱</div>
+    <div class="leaf" style="bottom: 15%; left: 10%;">🌾</div>
+    
+    <!-- Header -->
     <header>
-        <div class="conteudo-cabecalho">
-            <h1>Hortas Comunitárias de Maringá</h1>
-            <p>Conectando você à natureza e à comunidade local!</p>
-            <p>Projeto Agrinho 2025</p>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h1>Hortas Comunitárias de Maringá</h1>
+                </div>
+                <p class="tagline">Conectando você à natureza e à comunidade local!</p>
+                <div class="project-banner">
+                    <i class="fas fa-star"></i> Projeto ativo desde 2007
+                </div>
+                <p>Cultive sua própria comida, fortaleça laços e ajude o meio ambiente!</p>
+                <a href="#cadastro" class="cta-button">Participe Agora <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
     </header>
 
-    <main>
-        <section class="secao-introducao">
-            <h2>Cultive sua própria comida, fortaleça laços e ajude o meio ambiente!</h2>
-            <p>Quem nunca pensou em comer alimentos sem agrotóxicos, cuidar de plantas no tempo livre, ou até ganhar uma
-                pequena renda com isso? Se você é uma dessas pessoas e ainda não conhece, venha participar da horta
-                comunitária!</p>
-        </section>
-
-        <section class="secao-sobre">
-            <h2>O que são as Hortas Comunitárias?</h2>
-            <p>As hortas comunitárias de Maringá foram uma iniciativa de Feniman e Araújo em 2007, firmando uma
-                parceria entre a Prefeitura, o Centro de Referência em Agricultura Urbana e Periurbana (CERAUP) da
-                Universidade Estadual de Maringá, as famílias interessadas e as centrais de abastecimento de energia
-                elétrica. Essas hortas estão integradas ao programa "Maringá Saudável", com o objetivo de melhorar a
-                qualidade de vida da população. Terrenos baldios, antes usados como lixões, são indicados pela população
-                e restaurados pela prefeitura para serem cultivados pelos participantes.</p>
-        </section>
-
-        <section class="secao-como-funciona">
-            <h2>Como funciona?</h2>
-            <p>As hortas são implementadas em terrenos baldios, muitas vezes em fundos de vale, que antes serviam como
-                descarte de lixo e são reformados para uso legal. A parceria com empresas como Cocamar, Usaçucar,
-                Frigorífico Big Boi e BS-Bios garante a doação de sementes, mudas, adubos, infraestrutura, reuniões
-                mensais e a disponibilização de assistentes técnicos e equipe multidisciplinar. O processo de plantio e
-                manutenção é responsabilidade exclusiva das famílias, e visitantes podem fazer doações de alimentos,
-                insumos e tempo.</p>
-            <div class="container-beneficios">
-                <div class="cartao-beneficio">
-                    <i class="fas fa-leaf icone"></i>
-                    <h3>Alimento Saudável</h3>
-                    <p>Cultive alimentos frescos e sem agrotóxicos para consumo próprio.</p>
-                </div>
-                <div class="cartao-beneficio">
-                    <i class="fas fa-hand-holding-usd icone"></i>
-                    <h3>Renda Extra</h3>
-                    <p>Venda o excedente da produção e complemente sua renda familiar.</p>
-                </div>
-                <div class="cartao-beneficio">
-                    <i class="fas fa-users icone"></i>
-                    <h3>Socialização</h3>
-                    <p>Conheça novas pessoas, socialize e fortaleça a comunidade.</p>
-                </div>
-                <div class="cartao-beneficio">
-                    <i class="fas fa-heartbeat icone"></i>
-                    <h3>Bem-Estar</h3>
-                    <p>Exercite-se ao ar livre e cuide da sua saúde física e mental.</p>
-                </div>
-                <div class="cartao-beneficio">
-                    <i class="fas fa-globe icone"></i>
-                    <h3>Meio Ambiente</h3>
-                    <p>Transforme terrenos baldios em áreas verdes produtivas.</p>
-                </div>
+    <!-- Navegação -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo-small">
+                <i class="fas fa-seedling"></i>
+                <span>Hortas Comunitárias</span>
             </div>
-        </section>
-
-        <section class="secao-como-cadastrar">
-            <h2>Como se cadastrar?</h2>
-            <ol class="passos-cadastro">
-                <li>
-                    <i class="fas fa-building icone-passo"></i>
-                    <h3>1. Procure a SEMUSP:</h3>
-                    <p>A Secretaria Municipal de Serviços Públicos (SEMUSP) é responsável por coordenar o programa de
-                        Hortas Comunitárias em Maringá.</p>
-                </li>
-                <li>
-                    <i class="fas fa-calendar-alt icone-passo"></i>
-                    <h3>2. Participe da reunião inicial:</h3>
-                    <p>A primeira reunião tem como objetivo esclarecer como funciona o projeto e como se cadastrar.</p>
-                </li>
-                <li>
-                    <i class="fas fa-file-alt icone-passo"></i>
-                    <h3>3. Documentos necessários:</h3>
-                    <p>É provável que você precise apresentar documentos como RG, CPF e comprovante de residência para
-                        se cadastrar.</p>
-                </li>
-                <li>
-                    <i class="fas fa-info-circle icone-passo"></i>
-                    <h3>4. Informações adicionais:</h3>
-                    <p>A prefeitura pode fornecer orientações sobre o que e como plantar, bem como sobre os cuidados com
-                        a horta.</p>
-                </li>
-            </ol>
-        </section>
-
-        <section class="secao-localizacao">
-            <h2>Locais das Hortas Comunitárias</h2>
-            <p>Conheça os principais locais onde se encontram as hortas:</p>
-
-            <div class="container-cartoes">
-                <!-- Cartão 1 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/01-jardim-aurora/1" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=L-ZI7A2jJdx9Me9BvYs9sQ&cb_client=search.gws-prod.gps&w=408&h=240&yaw=339.07108&pitch=0&thumbfov=100"
-                        alt="Imagem da Horta Jardim Aurora">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">01 - Jardim Aurora</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Moreira</p>
-                            <p><strong>Contato:</strong> (44) 99922-0533</p>
-                            <p><strong>Endereço:</strong> Rua Pioneiro Antônio Marin Filho, 645 - Jardim Aurora</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 2 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/02-borba-gato/2" class="cartao">
-                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nquNVzfhHXt6iLvmbjhT8PNf4qei96RSqSRh5XTqTKjODNLnn2LsxDD66bW3yZy1IzjCplED0_ps5jk6xZ9jsCEW12XbG1CGMgbYgs2ssa6eq6TTCWfDSjsWsm0NaKFODSBuTKKFw=s1360-w1360-h1020-rw"
-                        alt="Imagem da Horta Borba Gato">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">02 - Borba Gato</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> João Ribeiro, Francisco</p>
-                            <p><strong>Contato:</strong> (44) 99858-7489 / (44) 99856-0613</p>
-                            <p><strong>Endereço:</strong> Rua dos Gerânios, 2016 - Conjunto Habitacional Inocente Vila
-                                Nova Júnior</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 3 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/03-branca-vieira-sopao-ii/3" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=PVl1b1vKXJ646BW7OKatjQ&cb_client=search.gws-prod.gps&w=408&h=240&yaw=302.30853&pitch=0&thumbfov=100"
-                        alt="Imagem da Horta Branca Vieira - Sopão II">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">03 - Branca Vieira - Sopão II</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> José Donizete</p>
-                            <p><strong>Contato:</strong> (44) 99811-8090</p>
-                            <p><strong>Endereço:</strong> Rua Rio São Francisco, 2011 - Loteamento Batel</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 4 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/04-cidade-alta/4" class="cartao">
-                    <img src="https://transforma.fbb.org.br/storage/socialtecnologies/682/images/Horta%20comunitaria%201.JPG"
-                        alt="Imagem da Horta Cidade Alta">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">04 - Cidade Alta</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Alberto, Augusto</p>
-                            <p><strong>Contato:</strong> (44) 99870-6125 / (44) 99973-7970 / (44) 99707-3952</p>
-                            <p><strong>Endereço:</strong> Rua Evaldo Braga, 1386 - Conjunto Residencial Cidade Alta</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 5 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/05-cidade-cancao/5" class="cartao">
-                    <img src="https://gmconline.com.br/wp-content/uploads/2022/10/04.10-horta-comunitaria-paraiso-banheiros-6-2-1920x1280-1.jpg"
-                        alt="Imagem da Horta Cidade Canção">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">05 - Cidade Canção</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Oerly, Maura</p>
-                            <p><strong>Contato:</strong> (44) 99145-1018 / (44) 98424-6170</p>
-                            <p><strong>Endereço:</strong> Rua Pioneiro Celeste Fadel, 313 - Jardim São Silvestre</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 6 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/06-vila-esperanca/6" class="cartao">
-                    <img src="https://i0.wp.com/www.maringamais.com.br/wp-content/uploads/2024/04/horta-comunitaria.jpg?resize=640%2C426&ssl=1">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">06 - Vila Esperança</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Juraci, Maria</p>
-                            <p><strong>Contato:</strong> (44) 99846-1665 / (44) 99994-3311 / (44) 99716-4708</p>
-                            <p><strong>Endereço:</strong> Rua Maria Thereza Bergamasco, 638 - Cidade Jardim</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 7 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/07-distrito-floriano/7" class="cartao">
-                    <img src="https://i0.wp.com/www.maringamais.com.br/wp-content/uploads/2024/04/horta-comunitaria.jpg?resize=640%2C426&ssl=1"
-                        alt="Imagem da Horta Distrito Floriano">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">07 - Distrito Floriano</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Paulo, Aparecida</p>
-                            <p><strong>Contato:</strong> (44) 99737-3560 / (44) 98454-8909 / (44) 99903-4204</p>
-                            <p><strong>Endereço:</strong> Avenida Antônio Santiago Gualda, 1475 - Distrito de Floriano
-                                (Floriano)</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 8 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/08-conjunto-guaiapo/8" class="cartao">
-                    <img src="https://noticias.maringa.com/storage/noticias/10439_horta-comunitaria-guaiapo.jpg"
-                        alt="Imagem da Horta Conjunto Guaiapó">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">08 - Conjunto Guaiapó</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Antônio, Pedro</p>
-                            <p><strong>Contato:</strong> (44) 99723-0435 / (44) 99994-7584</p>
-                            <p><strong>Endereço:</strong> Rua José Américo de Almeida, 1240 - Recreio dos Bandeirantes
-                            </p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 9 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/09-distrito-iguatemi-1/9" class="cartao">
-                    <img src="https://www.boaspraticasods.pr.gov.br/sites/ods/arquivos_restritos/files/imagem/2023-02/63b6d064e489.jpg"
-                        alt="Imagem da Horta Distrito Iguatemi 1">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">09 - Distrito Iguatemi 1</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Antônia</p>
-                            <p><strong>Contato:</strong> (44) 98851-1953</p>
-                            <p><strong>Endereço:</strong> Rua Urutau, 392 - Conjunto Residencial Ney Braga</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 10 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/10-conjunto-itatiaia/10" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=BOQHVOI2MY76CbaQ2IUGqg&cb_client=search.gws-prod.gps&w=408&h=240&yaw=260.4111&pitch=0&thumbfov=100"
-                        alt="Imagem da Horta Conjunto Itatiaia">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">10 - Conjunto Itatiaia</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Esvaldo, Antônio, Alessandra</p>
-                            <p><strong>Contato:</strong> (44) 99974-1725 / (44) 99772-4474 / (44) 99919-7589</p>
-                            <p><strong>Endereço:</strong> Rua Poeta Mário de Andrade, 107 - Jardim Atlanta</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 11 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/11-parque-itaipu/11" class="cartao">
-                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4noJN5n3GsPevgQjOuuNAEKbrH3clXd5nKjS6-v8z-M__NXT6C9cq0DBQ5owpvB4kLDes8rqpHeXCg9a9bpZBluyBQDyfyv2bgjDXHqTHqpYjzqYwLG1P_Ykw1F5dF2FQ9ZxD7c=s1360-w1360-h1020-rw"
-                        alt="Imagem da Horta Parque Itaipu">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">11 - Parque Itaipu</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Severino</p>
-                            <p><strong>Contato:</strong> (44) 99744-1881</p>
-                            <p><strong>Endereço:</strong> Avenida Pioneiro Antônio Ruiz Saldanha, S/N - Parque
-                                Industrial</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 12 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/12-conjunto-lea-leal/12" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=eTO3XcGFzsUaHHcMexuxBQ&cb_client=search.gws-prod.gps&w=408&h=240&yaw=323.46817&pitch=0&thumbfov=100"
-                        alt="Imagem da Horta Conjunto Lea Leal">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">12 - Conjunto Lea Leal</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Cecília</p>
-                            <p><strong>Contato:</strong> (44) 3268-6182 / (44) 3268-4456 / (44) 03253-2246</p>
-                            <p><strong>Endereço:</strong> Rua Guatemala, 1200 - Vila Morangueira</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 13 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/13-ney-braga/13" class="cartao">
-                    <img src="https://cbnmaringa.com.br/uploads_lg/2352578c0da0ef896c90266a56bf29be.jpg"
-                        alt="Imagem da Horta Ney Braga">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">13 - Ney Braga</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Nivaldo</p>
-                            <p><strong>Contato:</strong> (44) 99981-7127</p>
-                            <p><strong>Endereço:</strong> Rua João de barro, 180 - Conjunto Residencial Ney Braga</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 14 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/14-jardim-oasis/14" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=Qx-z0iLxTCuU0t_So4xV-A&cb_client=search.gws-prod.gps&w=408&h=240&yaw=174.07602&pitch=0&thumbfov=100"
-                        alt="Imagem da Horta Jardim Oásis">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">14 - Jardim Oásis</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Carneiro</p>
-                            <p><strong>Contato:</strong> (44) 98423-2411</p>
-                            <p><strong>Endereço:</strong> Rua Rio Japuratuba, 676 - Conjunto Residencial Branca Vieira
-                            </p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 15 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/15-jardim-olimpico/15" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=E5sSRrXG0P5nN7rNfLsjSQ&cb_client=search.gws-prod.gps&w=408&h=240&yaw=219.05647&pitch=0&thumbfov=100"
-                        alt="Imagem da Horta Jardim Olímpico">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">15 - Jardim Olímpico</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Valdir, Graci</p>
-                            <p><strong>Contato:</strong> (44) 99829-1868 / (44) 99970-5540</p>
-                            <p><strong>Endereço:</strong> Rua Beija-flor, 129 - Jardim Olímpico</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 16 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/16-parque-das-palmeiras/16" class="cartao">
-                    <img src="https://transforma.fbb.org.br/storage/socialtecnologies/682/images/Horta%20comunitaria%201.JPG"
-                        alt="Imagem da Horta Parque das Palmeiras">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">16 - Parque das Palmeiras</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Antônio</p>
-                            <p><strong>Contato:</strong> (44) 99816-9323</p>
-                            <p><strong>Endereço:</strong> Rua Flamboyant, 1214 - Parque Palmeiras</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 17 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/17-jardim-reboucas/17" class="cartao">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHN_R6ks9GXLK1mmk3bSnRtYd42kwOgl0vxQ&s"
-                        alt="Imagem da Horta Jardim Rebouças">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">17 - Jardim Rebouças</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> José Carvalho</p>
-                            <p><strong>Contato:</strong> (44) 03267-7566</p>
-                            <p><strong>Endereço:</strong> Rua Pioneira Amália Carzoni Baltazar, 1127 - Jardim Rebouças
-                            </p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 18 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/18-parque-taruma/18" class="cartao">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4SwHHCINN20_XvXNcGKxRFDXX-8VkIsk1dw&s"
-                        alt="Imagem da Horta Parque Tarumã">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">18 - Parque Tarumã</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Amauri</p>
-                            <p><strong>Contato:</strong> (44) 99820-6245</p>
-                            <p><strong>Endereço:</strong> Rua Carlos Maurício Duarte, 884 - Parque Tarumã</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 19 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/19-tuiuti/19" class="cartao">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3gv_J_xiqlIRWAxrlg7uU3eYqB725ljPJBg&s"
-                        alt="Imagem da Horta Tuiuti">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">19 - Tuiuti</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Kleberson, Cida</p>
-                            <p><strong>Contato:</strong> (44) 99868-2733 / (44) 99811-6677</p>
-                            <p><strong>Endereço:</strong> Rua Rio Parnaíba, 688 - Jardim Novo Oásis</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 20 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/20-jardim-universo/20" class="cartao">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk7J9UlF7Y0SX4dajkKoPvaAzs_yVuimod4w&s"
-                        alt="Imagem da Horta Jardim Universo">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">20 - Jardim Universo</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Ivone</p>
-                            <p><strong>Contato:</strong> (44) 99955-8034</p>
-                            <p><strong>Endereço:</strong> Avenida Joaquim Duarte Moleirinho, S/N - Jardim Alamar</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 21 -->
-                <a href="https://maps.app.goo.gl/M4fMjBkuHjS2cUGJ8" class="cartao">
-                    <img src="https://gmconline.com.br/wp-content/uploads/2022/10/WhatsApp-Image-2022-09-10-at-10.52.11.jpeg"
-                        alt="Imagem da Horta Jardim São Clemente">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">Jardim São Clemente</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Informações:</strong> N/A</p>
-                            <p><strong>Contato:</strong> N/A</p>
-                            <p><strong>Endereço:</strong> N/A</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 22 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/21-parque-das-grevilhas/21" class="cartao">
-                    <img src="https://cdn.ciclovivo.com.br/wp-content/uploads/2017/11/b1fa6d7b3e2b.jpg"
-                        alt="Imagem da Horta Parque das Grevilhas">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">21 - Parque das Grevilhas</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Alcenir, Luiz, Sueli</p>
-                            <p><strong>Contato:</strong> (44) 99864-9813 / (44) 99944-1464 / (44) 99989-4024</p>
-                            <p><strong>Endereço:</strong> Rua Pioneiro Nereu Mazzer, 2062 - Jardim Tóquio</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 23 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/22-jardim-copacabana/22" class="cartao">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1sBrcZNR5s95Mi2O2MIRMJqFYAoROk5BhgQ&s"
-                        alt="Imagem da Horta Jardim Copacabana">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">22 - Jardim Copacabana</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Otávio Lima, Maria</p>
-                            <p><strong>Contato:</strong> (44) 99924-9378 / (44) 99730-3970 / (44) 99991-2298</p>
-                            <p><strong>Endereço:</strong> Rua Hermínio Girardi, 736 - Conjunto Habitacional Hermann
-                                Moraes Barros</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 24 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/23-conjunto-branca-vieira-i/23"
-                    class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=cPwgU-JpiMjXsZVF3vq8QQ&cb_client=search.gws-prod.gps&w=408&h=240&yaw=17.361494&pitch=0&thumbfov=100"
-                        alt="Imagem da Horta Conjunto Branca Vieira I">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">23 - Conjunto Branca Vieira I</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Benis, Almerinda, Valdeci</p>
-                            <p><strong>Contato:</strong> (44) 3029-6263 / (44) 99918-6504 / (44) 99972-9230</p>
-                            <p><strong>Endereço:</strong> Rua Rio Guandu, 1426 - Conjunto Residencial Branca Vieira</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 25 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/24-jardim-iguacu/24" class="cartao">
-                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nqGgMvqi7WmVG-BTTwRWrl0YhYLou3a7yc_7NndVGR53ksWIHTHKZyrHDz7IfP5lFPGFhZHnjYsU2CvVakGcegy4f34NzDOObVPHjHs2Fu-Emp4yxfXKpOv4T2py20ItWQajbUA=s1360-w1360-h1020-rw"
-                        alt="Imagem da Horta Jardim Iguaçu">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">24 - Jardim Iguaçu</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Alvimar</p>
-                            <p><strong>Contato:</strong> (44) 99959-4802 / (44) 99154-5356</p>
-                            <p><strong>Endereço:</strong> Avenida Arquiteto Nildo Ribeiro da Rocha, 5328 - Jardim
-                                Higienópolis</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 26 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/25-ebenezer/25" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=eRZMDG0fxviF93nfIfgxag&cb_client=search.gws-prod.gps&w=408&h=240&yaw=124.82637&pitch=0&thumbfov=100"
-                        alt="Imagem da Horta Ebenezer">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">25 - Ebenezer</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Alcides, Adão</p>
-                            <p><strong>Contato:</strong> (44) 99732-9156 / (44) 99990-7141</p>
-                            <p><strong>Endereço:</strong> Rua Pioneiro Bruno Bluthgen, 401 - Ebenezer</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 27 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/26-jardim-toquio/26" class="cartao">
-                    <img src="https://gmconline.com.br/wp-content/uploads/2022/10/HORTA-1-scaled.jpg"
-                        alt="Imagem da Horta Jardim Tóquio">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">26 - Jardim Tóquio</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Zilda</p>
-                            <p><strong>Contato:</strong> (44) 99997-2437 / (44) 03267-6050</p>
-                            <p><strong>Endereço:</strong> Avenida Pioneira Devige Crepaldi Schiavoni, 1569 - Jardim
-                                Tóquio</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 28 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/27-jardim-montreal/27" class="cartao">
-                    <img src="https://cdn.ciclovivo.com.br/wp-content/uploads/2017/11/b1fa6d7b3e2b.jpg"
-                        alt="Imagem da Horta Jardim Montreal">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">27 - Jardim Montreal</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Zé, Cleonice</p>
-                            <p><strong>Contato:</strong> (44) 99121-6555 / (44) 99908-6889</p>
-                            <p><strong>Endereço:</strong> Rua Pioneiro Mourvan Neves de Oliveira, 160 - Jardim Montrea
-                            </p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 29 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/28-jardim-liberdade/28" class="cartao">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhht0HjNBSb9Rji3iDNcbdy4dYdER7z8-meQ&s"
-                        alt="Imagem da Horta Jardim Liberdade">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">28 - Jardim Liberdade</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Júlio, Leonilda, Ademir</p>
-                            <p><strong>Contato:</strong> (44) 99814-6803 / (44) 98836-0112 / (44) 98407-1420</p>
-                            <p><strong>Endereço:</strong> Rua Armando Crippa, 745 - Jardim Liberdade</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 30 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/29-iguatemi-ii/29" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=Cycn4uTykiG6H2kHJH2A0A&cb_client=search.gws-prod.gps&yaw=41.116962&pitch=0&thumbfov=100&w=650&h=218"
-                        alt="Imagem da Horta Iguatemi II">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">29 - Iguatemi II</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsável:</strong> Regina</p>
-                            <p><strong>Contato:</strong> (44) 98826-5624</p>
-                            <p><strong>Endereço:</strong> Rua Antônia Furlan Borri, 891 - Conjunto Habitacional Albino
-                                Meneguetti (Iguatemi)</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 31 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/30-campos-elisios/30" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=mvm9Yx-hld_NiQMqeS6v2A&cb_client=search.gws-prod.gps&yaw=318.68756&pitch=0&thumbfov=100&w=650&h=218"
-                        alt="Imagem da Horta Campos Elísios">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">30 - Campos Elísios</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Isaías, Paulo</p>
-                            <p><strong>Contato:</strong> (44) 99931-4672 / (44) 99869-1638</p>
-                            <p><strong>Endereço:</strong> Rua Rio Samambaia, 952 - Jardim Campos Elísios</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 32 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/31-europa-ceu-azul/31" class="cartao">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWVtZ1NbPFi45BTSn9avBfDY2Uj-EVtUHk1g&s"
-                        alt="Imagem da Horta Europa / Céu Azul">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">31 - Europa / Céu Azul</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Cida</p>
-                            <p><strong>Contato:</strong> (44) 99926-2032 / (44) 99950-5951 / (44) 03255-2939</p>
-                            <p><strong>Endereço:</strong> Rua Mário de Souza, 195 - Conjunto João de Barro Porto
-                                Seguro II</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 33 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/32-sumare/32" class="cartao">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrXOzALWVKaBIlbbwUc-fZbGDFPcuiHLubeA&s"
-                        alt="Imagem da Horta Sumaré">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">32 - Sumaré</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Jorge, Osvaldo</p>
-                            <p><strong>Contato:</strong> (44) 99944-0880 / (44) 99948-3431</p>
-                            <p><strong>Endereço:</strong> Rua Mafalda Guise Negri, 367 - Loteamento Sumaré</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 34 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/33-jardim-paraiso/33" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=fCECRa7jm7ukWdbSKSwU6A&cb_client=search.gws-prod.gps&yaw=45.80746&pitch=0&thumbfov=100&w=650&h=218"
-                        alt="Imagem da Horta Jardim Paraíso">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">33 - Jardim Paraíso</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Antônio, Júlio</p>
-                            <p><strong>Contato:</strong> (44) 99802-4225 / (41) 99863-1324</p>
-                            <p><strong>Endereço:</strong> Rua Pioneiro Cezare Mochi, 684 - Jardim Paraíso</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 35 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/34-portal-das-torres/34" class="cartao">
-                    <img src="https://ciclovivo.com.br/wp-content/uploads/2025/06/hortabonsfrutos-Horta-Santos-ciclovivo-1024x683.png"
-                        alt="Imagem da Horta Portal das Torres">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">34 - Portal das Torres</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Graça, Alzira</p>
-                            <p><strong>Contato:</strong> (44) 99821-8574 / (44) 99947-9605 / (44) 03246-6921</p>
-                            <p><strong>Endereço:</strong> Rua Mitugu Miyabayashi, 1048 - Portal das Torres</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 36 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/35-moradia-atenas/35" class="cartao">
-                    <img src="https://noticias.maringa.com/storage/noticias/UWesm-prefeitura-de-maringa-inaugura-41-horta-comunitaria-saiba-onde.webp"
-                        alt="Imagem da Horta Moradia Atenas">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">35 - Moradia Atenas</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Toninha, Benedito</p>
-                            <p><strong>Contato:</strong> (44) 98405-3205 / (44) 99923-5824</p>
-                            <p><strong>Endereço:</strong> Rua Edson Evilásio Cantadori, 2655 - Moradias Atenas</p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 37 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/36-diamante/36" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=u2rb2ga-DOqbKFOcvMIvuQ&cb_client=search.gws-prod.gps&w=408&h=240&yaw=268.66904&pitch=0&thumbfov=100"
-                        alt="Imagem da Horta Diamante">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">36 - Diamante</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Aroldo, Kelly, Sueli</p>
-                            <p><strong>Contato:</strong> (44) 99966-7268 / (44) 99776-8832 / (44) 99984-7638</p>
-                            <p><strong>Endereço:</strong> Rua Pioneiro Pedro Gabriel dos Santos, 2311 - Parque das Ban
-                            </p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Cartão 38 -->
-                <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/37-hortencia-1/37" class="cartao">
-                    <img src="https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=ceuqmTnmMQoA3Wb0U6mopw&cb_client=search.gws-prod.gps&yaw=286.73535&pitch=0&thumbfov=100&w=216&h=218"
-                        alt="Imagem da Horta Hortência 1">
-                    <div class="conteudo-cartao">
-                        <div class="titulo-cartao">37 - Hortência 1</div>
-                        <div class="descricao-cartao">
-                            <p><strong>Responsáveis:</strong> Pinduca, Francis</p>
-                            <p><strong>Contato:</strong> (44) 99993-8099 / (44) 99946-1379</p>
-                            <p><strong>Endereço:</strong> Rua Gralha azul, 1815 - Jardim Olímpico</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <section class="secao-contato">
-            <h3>Para informações mais detalhadas, entre em contato com o site oficial da prefeitura.</h3>
-            <a href="https://www.maringa.pr.gov.br/hortas-comunitarias/" target="_blank" class="botao-principal">Acessar
-                Site Oficial</a>
-        </section>
-    </main>
-
-    <footer>
-        <div class="creditos">
-            <h4>Créditos</h4>
-            <p>Manoela C.G - aluna do Colégio Cívico Militar Duque de Caxias <br> E Flávio Faria - professor de
-                Desenvolvimento de Sistema </p>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#funciona">Como Funciona</a></li>
+                <li><a href="#beneficios">Benefícios</a></li>
+                <li><a href="#cadastro">Cadastro</a></li>
+                <li><a href="#locais">Locais</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
         </div>
-        <button id="voltar-topo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
-            <i class="fas fa-arrow-up"></i> Início
-        </button>
+    </nav>
+
+    <!-- Sobre -->
+    <section id="sobre">
+        <div class="container">
+            <div class="section-header">
+                <h2>O que são as Hortas Comunitárias?</h2>
+                <p>Conheça a iniciativa que transforma Maringá e a vida de seus moradores</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Transformando terrenos em oportunidades</h3>
+                    <p>As hortas comunitárias de Maringá foram uma iniciativa de Feniman e Araújo em 2007, firmando uma parceria entre a Prefeitura, o Centro de Referência em Agricultura Urbana e Periurbana (CERAUP) da Universidade Estadual de Maringá, as famílias interessadas e as centrais de abastecimento de energia elétrica.</p>
+                    <p>Essas hortas estão integradas ao programa "Maringá Saudável", com o objetivo de melhorar a qualidade de vida da população. Terrenos baldios, antes usados como lixões, são indicados pela população e restaurados pela prefeitura para serem cultivados pelos participantes.</p>
+                    <p>Quem nunca pensou em comer alimentos sem agrotóxicos, cuidar de plantas no tempo livre, ou até ganhar uma pequena renda com isso? Se você é uma dessas pessoas e ainda não conhece, venha participar da horta comunitária!</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?q=80&w=2070" alt="Horta Comunitária">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como funciona -->
+    <section id="funciona">
+        <div class="container">
+            <div class="section-header">
+                <h2>Como Funciona?</h2>
+                <p>Conheça o processo que transforma terrenos abandonados em espaços produtivos</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?q=80&w=2070" alt="Funcionamento das Hortas">
+                </div>
+                <div class="about-text">
+                    <h3>Parcerias que transformam</h3>
+                    <p>As hortas são implementadas em terrenos baldios, muitas vezes em fundos de vale, que antes serviam como descarte de lixo e são reformados para uso legal.</p>
+                    <p>A parceria com empresas como Cocamar, Usaçucar, Frigorífico Big Boi e BS-Bios garante a doação de sementes, mudas, adubos, infraestrutura, reuniões mensais e a disponibilização de assistentes técnicos e equipe multidisciplinar.</p>
+                    <p>O processo de plantio e manutenção é responsabilidade exclusiva das famílias, e visitantes podem fazer doações de alimentos, insumos e tempo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section id="beneficios" class="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2>Benefícios das Hortas Comunitárias</h2>
+                <p>Descubra como participar pode transformar sua vida e sua comunidade</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3>Alimento Saudável</h3>
+                    <p>Cultive alimentos frescos e sem agrotóxicos para consumo próprio, garantindo uma alimentação mais saudável para sua família.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Renda Extra</h3>
+                    <p>Venda o excedente da produção e complemente sua renda familiar de forma sustentável.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Socialização</h3>
+                    <p>Conheça novas pessoas, socialize e fortaleça a comunidade em um ambiente acolhedor.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Bem-Estar</h3>
+                    <p>Exercite-se ao ar livre e cuide da sua saúde física e mental através do contato com a natureza.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Meio Ambiente</h3>
+                    <p>Transforme terrenos baldios em áreas verdes produtivas, contribuindo para uma cidade mais sustentável.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Comunidade</h3>
+                    <p>Participe de um projeto que fortalece os laços comunitários e promove a solidariedade entre os moradores.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cadastro -->
+    <section id="cadastro">
+        <div class="container">
+            <div class="section-header">
+                <h2>Como se Cadastrar?</h2>
+                <p>Siga estes passos simples para começar a participar das Hortas Comunitárias</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Procure a SEMUSP</h3>
+                    <p>A Secretaria Municipal de Serviços Públicos (SEMUSP) é responsável por coordenar o programa de Hortas Comunitárias em Maringá.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Participe da reunião inicial</h3>
+                    <p>A primeira reunião tem como objetivo esclarecer como funciona o projeto e como se cadastrar.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Documentos necessários</h3>
+                    <p>É provável que você precise apresentar documentos como RG, CPF e comprovante de residência para se cadastrar.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Orientações</h3>
+                    <p>A prefeitura pode fornecer orientações sobre o que e como plantar, bem como sobre os cuidados com a horta.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locais -->
+    <section id="locais" class="locations">
+        <div class="container">
+            <div class="section-header">
+                <h2>Locais das Hortas Comunitárias</h2>
+                <p>Encontre a horta comunitária mais próxima de você</p>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar horta por nome ou bairro...">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="locations-grid" id="locationsGrid">
+                <!-- Jardim Aurora -->
+                <div class="location-card">
+                    <div class="location-image" style="background-image: url('https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?q=80&w=2070');"></div>
+                    <div class="location-info">
+                        <h3><i class="fas fa-map-marker-alt"></i> 01 - Jardim Aurora</h3>
+                        <p>Responsável: Moreira</p>
+                        <div class="location-contact">
+                            <p><i class="fas fa-phone"></i> (44) 99922-0533</p>
+                            <p><i class="fas fa-map-pin"></i> Rua Pioneiro Antônio Marin Filho, 645 - Jardim Aurora</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Borba Gato -->
+                <div class="location-card">
+                    <div class="location-image" style="background-image: url('https://images.unsplash.com/photo-1594122230689-45899d9e6f69?q=80&w=2070');"></div>
+                    <div class="location-info">
+                        <h3><i class="fas fa-map-marker-alt"></i> 02 - Borba Gato</h3>
+                        <p>Responsáveis: João Ribeiro, Francisco</p>
+                        <div class="location-contact">
+                            <p><i class="fas fa-phone"></i> (44) 99858-7489 / (44) 99856-0613</p>
+                            <p><i class="fas fa-map-pin"></i> Rua dos Gerânios, 2016 - Conjunto Habitacional Inocente Vila Nova Júnior</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cidade Alta -->
+                <div class="location-card">
+                    <div class="location-image" style="background-image: url('https://images.unsplash.com/photo-1492496913980-501348b61469?q=80&w=2070');"></div>
+                    <div class="location-info">
+                        <h3><i class="fas fa-map-marker-alt"></i> 04 - Cidade Alta</h3>
+                        <p>Responsáveis: Alberto, Augusto</p>
+                        <div class="location-contact">
+                            <p><i class="fas fa-phone"></i> (44) 99870-6125 / (44) 99973-7970 / (44) 99707-3952</p>
+                            <p><i class="fas fa-map-pin"></i> Rua Evaldo Braga, 1386 - Conjunto Residencial Cidade Alta</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cidade Canção -->
+                <div class="location-card">
+                    <div class="location-image" style="background-image: url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?q=80&w=2070');"></div>
+                    <div class="location-info">
+                        <h3><i class="fas fa-map-marker-alt"></i> 05 - Cidade Canção</h3>
+                        <p>Responsáveis: Oerly, Maura</p>
+                        <div class="location-contact">
+                            <p><i class="fas fa-phone"></i> (44) 99145-1018 / (44) 98424-6170</p>
+                            <p><i class="fas fa-map-pin"></i> Rua Pioneiro Celeste Fadel, 313 - Jardim São Silvestre</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vila Esperança -->
+                <div class="location-card">
+                    <div class="location-image" style="background-image: url('https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1974');"></div>
+                    <div class="location-info">
+                        <h3><i class="fas fa-map-marker-alt"></i> 06 - Vila Esperança</h3>
+                        <p>Responsáveis: Juraci, Maria</p>
+                        <div class="location-contact">
+                            <p><i class="fas fa-phone"></i> (44) 99846-1665 / (44) 99994-3311 / (44) 99716-4708</p>
+                            <p><i class="fas fa-map-pin"></i> Rua Maria Thereza Bergamasco, 638 - Cidade Jardim</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Distrito Floriano -->
+                <div class="location-card">
+                    <div class="location-image" style="background-image: url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=2069');"></div>
+                    <div class="location-info">
+                        <h3><i class="fas fa-map-marker-alt"></i> 07 - Distrito Floriano</h3>
+                        <p>Responsáveis: Paulo, Aparecida</p>
+                        <div class="location-contact">
+                            <p><i class="fas fa-phone"></i> (44) 99737-3560 / (44) 98454-8909 / (44) 99903-4204</p>
+                            <p><i class="fas fa-map-pin"></i> Avenida Antônio Santiago Gualda, 1475 - Distrito de Floriano (Floriano)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#" class="cta-button">Ver Todas as 36 Hortas <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Hortas Comunitárias</h3>
+                    <p>Transformando terrenos baldios em espaços verdes produtivos e fortalecendo a comunidade de Maringá desde 2007.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#sobre">Sobre o Projeto</a></li>
+                        <li><a href="#funciona">Como Funciona</a></li>
+                        <li><a href="#beneficios">Benefícios</a></li>
+                        <li><a href="#cadastro">Como se Cadastrar</a></li>
+                        <li><a href="#locais">Locais das Hortas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-building"></i> Secretaria Municipal de Serviços Públicos (SEMUSP)</p>
+                        <p><i class="fas fa-phone"></i> (44) 3221-1234</p>
+                        <p><i class="fas fa-envelope"></i> hortas@maringa.pr.gov.br</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Prefeitura de Maringá - Av. XV de Novembro, 701</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Hortas Comunitárias de Maringá. Todos os direitos reservados. | Projeto Liga Jovem 2025</p>
+                <p>&copy; Créditos a Manoela Castro Geres e Professor Flávio Faria</p>
+            </div>
+        </div>
     </footer>
 
+    <script>
+        // ===== FUNÇÕES DE NAVEGAÇÃO =====
+        
+        // Menu Mobile
+        function toggleMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+        }
+        
+        // Scroll Suave
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Fechar Menu Mobile
+                        const navLinks = document.getElementById('navLinks');
+                        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                        navLinks.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
+                });
+            });
+        }
+        
+        // ===== FUNÇÕES DE BUSCA =====
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const locationsGrid = document.getElementById('locationsGrid');
+            const locationCards = locationsGrid.getElementsByClassName('location-card');
+            
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                Array.from(locationCards).forEach(card => {
+                    const cardText = card.textContent.toLowerCase();
+                    if (cardText.includes(searchTerm)) {
+                        card.style.display = '';
+                        setTimeout(() => {
+                            card.style.opacity = 1;
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = 0;
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        }
+        
+        // ===== ANIMAÇÕES =====
+        
+        // Animação em Scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.about-content, .section-header, .benefit-card, .step, .location-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Animação inicial
+        function initAnimations() {
+            const animatedElements = document.querySelectorAll('.about-content, .section-header, .benefit-card, .step, .location-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            
+            // Animação - Header
+            const headerContent = document.querySelector('.header-content');
+            headerContent.style.opacity = 0;
+            headerContent.style.transform = 'translateY(30px)';
+            headerContent.style.transition = 'opacity 1s ease, transform 1s ease';
+            
+            setTimeout(() => {
+                headerContent.style.opacity = 1;
+                headerContent.style.transform = 'translateY(0)';
+            }, 300);
+            
+            // Animação - Leaf
+            const leaves = document.querySelectorAll('.leaf');
+            leaves.forEach((leaf, index) => {
+                leaf.style.animationDuration = `${15 + index * 2}s`;
+                leaf.style.animationDelay = `${index * 1.5}s`;
+            });
+        }
+        
+        // ===== INICIALIZAÇÃO =====
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleMobileMenu();
+            setupSmoothScroll();
+            setupSearch();
+            initAnimations();
+            
+            // Configurar observador de scroll
+            window.addEventListener('scroll', animateOnScroll);
+            // Disparar uma vez no carregamento para elementos visíveis
+            animateOnScroll();
+        });
+    </script>
 </body>
-
 </html>
